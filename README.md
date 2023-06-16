@@ -1,4 +1,5 @@
 A small program for combining a set of cutout images into a single image.
+Uses SFML for image saving and loading, but any other library capable of turning an image into an array of color bytes and saving it back should be able to slotted in without much issue.
 
 This program makes the assumptions:
 	-All images are the same size (It will still work with different sizes, but the results may not be favorable)
