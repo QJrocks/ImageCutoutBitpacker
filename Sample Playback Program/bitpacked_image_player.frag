@@ -7,9 +7,12 @@
 //The image currently being used
 uniform sampler2D texture;
 //The frame of the image to extract, 0-indexed.
-uniform int frameMask;
+uniform int currentLayer;
 //The bits per layer. Should match the value at which the used image was encoded with.
 uniform int bitsPerLayer;
+
+//It's worth noting that for SFML at least, these uniforms need to be ints instead of uints in order to play nice.
+//I'm not really sure why this is, but you could probably swap them to uints if using a direct OpenGL implementation.
 
 
 void main() {	
@@ -20,10 +23,10 @@ void main() {
 	uint intColor = (uint(round(texColor.r * 255.f)) << 24u) | (uint(round(texColor.g * 255.f)) << 16u) | (uint(round(texColor.b * 255.f)) << 8u) | (uint(round(texColor.a * 255.f)));
 	
 	//Calculate the bitmask using the same formula in applyLayerToImage. As stated there, this works as both a bitmask and a maximum alpha value to use for normalization!
-	uint bitmask = (1u << (bitsPerLayer - 1)) - 1;
+	uint bitMask = (1u << uint(bitsPerLayer)) - 1u;
 
 	//Shift the color according to the current frame, and mask out the unused bits
-	intColor = (intColor >> uint(frameMask * bitsPerLayer)) & bitmask;
+	intColor = (intColor >> uint(currentLayer * bitsPerLayer)) & bitMask;
 
 	//Normalize the calculated alpha value back to the 0-1 range.
 	texColor.a = float(intColor) / float(bitMask); 

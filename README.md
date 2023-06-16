@@ -11,7 +11,7 @@ Programmed in C++ 14 (With macro definition to allow for C++ 17 compilation, if 
 Since this is largely intended for pre-processing images, it's a standalone program as opposed to a library.
 Can be run directly or from a script/command line.
 
-Check releases for an example use of this, including a batch script, sample input (rendered by yours truly), and a small playback program (coming soon)!
+Check releases for an example use of this, including a batch script, sample input (rendered by yours truly), and a small playback program (check the Releases tab)!
 
 I personally found use for this program as a way to encode short movement clips for a personal project without needing to bring in a video-handling library or worry about compression artifacts.
 
